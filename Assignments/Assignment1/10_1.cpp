@@ -12,7 +12,7 @@ int main()
     // Using std::regex
     {
         ScopedTimer st{"std::regex duration: "};
-        std::regex rgx(R"(\d+\.\d+)");
+        std::regex rgx(R"((\d+)\.(\d+))");
         auto begin = std::sregex_iterator(str.begin(), str.end(), rgx);
         auto end = std::sregex_iterator();
 
@@ -20,16 +20,21 @@ int main()
         for (std::sregex_iterator i = begin; i != end; ++i)
         {
             std::smatch match = *i;
-            std::cout << match.str() << "\n";
+            std::string before = match[1].str();
+            std::string after  = match[2].str();
+            std::cout << before << " is before the decimal and " << after << " is after the decimal" << std::endl;
         }
     }
+
+    std::cout << std::endl;
 
     // Using ctre
     {
         ScopedTimer st{"crte duration: "};
-        for (auto m : ctre::search_all<"\\d+\\.\\d+">(str)) 
+        for (auto& m : ctre::search_all<"(\\d+)\\.(\\d+)">(str)) 
         {
-            std::cout << m.to_view() << "\n";
+            const auto& [full, before, after] = m;
+            std::cout << before << " is before the decimal and " << after << " is after the decimal" << std::endl;
         }
     }
     
