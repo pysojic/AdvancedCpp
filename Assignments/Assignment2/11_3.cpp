@@ -8,7 +8,7 @@ int main()
 {
     using Tuple = mpcs::Tuple2<int, double, char, int, double>;
 
-    using Types = mpcs::IndexOf<Tuple, double>::type;
+    Tuple tup{1, 2.0, 'a', 3, 4.9};
 
-    std::cout << mpcs::Getter3<Tuple, double>::value;
+    std::cout << mpcs::get<char>(tup);
 }
