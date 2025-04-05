@@ -138,7 +138,7 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
     }
 
-    // saffir_simpson_stl(infile);
+    saffir_simpson_stl(infile);
 
     saffir_simpson_ctre(infile);
 

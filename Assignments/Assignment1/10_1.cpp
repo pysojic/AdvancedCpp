@@ -1,3 +1,5 @@
+// To run each assignment part, change the CMakeLists.txt file with the associated cpp file
+
 #include <iostream>
 #include <regex>
 #include <string>
