@@ -10,5 +10,5 @@ int main()
 
     Tuple tup{1, 2.0, 'a', 3, 4.9};
 
-    std::cout << mpcs::get<char>(tup);
+    std::cout << mpcs::get<double>(tup);
 }

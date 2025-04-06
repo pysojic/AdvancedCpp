@@ -102,16 +102,10 @@ namespace mpcs {
 		using Remaining = Info::type; // Extract the types remaining (after the target)
 
 		// If value is -1, this means the target was not found
-		static_assert(value != -1, "Does not contain the type");
+		static_assert(value != -1, "Type not found");
 		// If value is NOT -1 with the remaining types, 
 		// this means the target was found multiple times, hence this is an ambiguous call
-		static_assert(IndexOf<Remaining, Target>::value == -1, "Ambiguous call");
-	};
-
-	template<typename... Ts, typename Target>
-	struct GetterByType<Tuple2<Target, Ts...>, Target>
-	{
-		
+		static_assert(IndexOf<Remaining, Target>::value == -1, "Ambiguous call, type appears multiple times");
 	};
 
 	template<typename Target, typename ...Ts>
