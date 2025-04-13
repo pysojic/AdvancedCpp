@@ -5,36 +5,6 @@
 
 using namespace cspp51045;
 
-struct Scrollbar {
-    virtual size_t position() = 0;
-  };
-  
-  struct Button {
-    virtual void press() = 0;
-  };
-  
-  struct QtScrollbar : public Scrollbar {
-    size_t position() { return 0; }
-  };
-  
-  struct QtButton : public Button {
-    void press() { std::cout << "QtButton pressed" << std::endl; }
-  };
-  
-  struct WindowsScrollbar : public Scrollbar {
-    size_t position() { return 0; }
-  };
-  
-  struct WindowsButton : public Button {
-    void press() { std::cout << "WindowsButton pressed" << std::endl; }
-  };
-  
-using AbstractWidgetFactory = abstract_factory<Scrollbar, Button>;
-using QtWidgetFactory 
-= concrete_factory<AbstractWidgetFactory, QtScrollbar, QtButton>;
-using WindowsWidgetFactory
-= concrete_factory<AbstractWidgetFactory, WindowsScrollbar, WindowsButton>;
-
 struct Locomotive
 {
     virtual void start_engine() = 0;
@@ -101,9 +71,7 @@ struct RealCaboose : public Caboose
     }
 };
 
-
 using AbstractTrainFactory = abstract_factory<Locomotive, FreightCar, Caboose>;
-
 using ModelTrainFactory = concrete_factory<AbstractTrainFactory, ModelLocomotive, ModelFreightCar, ModelCaboose>;
 using RealTrainFactory = concrete_factory<AbstractTrainFactory, RealLocomotive, RealFreightCar, RealCaboose>;
 

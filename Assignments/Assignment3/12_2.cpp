@@ -3,18 +3,21 @@
 
 template<typename T>
 struct is_reference
+    // : std::false_type // this is equivalent
 {
     static constexpr bool value = false;
 };
 
 template<typename T>
 struct is_reference<T&>
+    // : std::true_type // this is equivalent
 {
     static constexpr bool value = true;
 };
 
 template<typename T>
 struct is_reference<T&&>
+    // : std::true_type // this is equivalent
 {
     static constexpr bool value = true;
 };
@@ -30,14 +33,14 @@ struct remove_reference
 
 template<typename T>
 struct remove_reference<T&>
+    : public remove_reference<T>
 {
-    using type = T;
 };
 
 template<typename T>
 struct remove_reference<T&&>
+    : public remove_reference<T>
 {
-    using type = T;
 };
 
 template<typename T>
