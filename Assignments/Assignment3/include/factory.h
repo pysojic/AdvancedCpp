@@ -22,7 +22,8 @@ struct abstract_creator
 };
 
 template<typename... Ts>
-struct abstract_factory : public abstract_creator<Ts>... 
+struct abstract_factory 
+	: public abstract_creator<Ts>... 
 {
 	template<class U> 
 	unique_ptr<U> create() 
@@ -34,7 +35,8 @@ struct abstract_factory : public abstract_creator<Ts>...
 };
 
 template<typename AbstractFactory, typename Abstract, typename Concrete>
-struct concrete_creator : virtual public AbstractFactory 
+struct concrete_creator 
+	: virtual public AbstractFactory 
 {
 	unique_ptr<Abstract> doCreate(TT<Abstract> &&) override 
 	{
@@ -46,9 +48,8 @@ template<typename AbstractFactory, typename... ConcreteTypes>
 struct concrete_factory;
 
 template<typename... AbstractTypes, typename... ConcreteTypes>
-struct concrete_factory
-  <abstract_factory<AbstractTypes...>, ConcreteTypes...> 
-  : public concrete_creator<abstract_factory<AbstractTypes...>, 
+struct concrete_factory<abstract_factory<AbstractTypes...>, ConcreteTypes...> 
+	: public concrete_creator<abstract_factory<AbstractTypes...>, 
 	                        AbstractTypes, ConcreteTypes>... 
 {};
 
@@ -93,25 +94,25 @@ template<typename Signature>
 struct product_type;
 
 template<typename T, typename... Args>
-struct product_type<T(Args...)> {
+struct product_type<T(Args...)> 
+{
     using type = T;
 };
 
-// If a plain type is provided, we interpret it as a function type with no arguments.
 template<typename T>
-struct product_type : product_type<T()> {};
+struct product_type 
+	: product_type<T()> {};
 
 template<typename AbstractFactory, typename... ConcreteTypes>
 struct flexible_concrete_factory;
 
 template<typename... AbstractSignatures, typename... ConcreteTypes>
-struct flexible_concrete_factory< flexible_abstract_factory<AbstractSignatures...>, ConcreteTypes... >
+struct flexible_concrete_factory<flexible_abstract_factory<AbstractSignatures...>, ConcreteTypes... >
     : public flexible_concrete_creator<
            flexible_abstract_factory<AbstractSignatures...>,
            typename product_type<AbstractSignatures>::type,
            ConcreteTypes,
-           AbstractSignatures
-       >...
+           AbstractSignatures>...
 {};
 
 }
