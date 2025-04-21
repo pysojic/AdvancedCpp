@@ -10,7 +10,6 @@
 
 namespace mpcs 
 {
-
   enum class State : uint8_t { empty, val, exc };
 
   template<typename T>
