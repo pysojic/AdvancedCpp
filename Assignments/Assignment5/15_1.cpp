@@ -37,7 +37,7 @@ int main()
     }
 
     /*
-        The par and par_unseq execution policies are about 2 times faster that the seq policy.mt
-        There is no tangible difference between the par and par_unseq policies.
+        The par and par_unseq execution policies are about 2 times faster than the seq policy
+        There is no tangible time difference between the par and par_unseq policies
     */
 }
