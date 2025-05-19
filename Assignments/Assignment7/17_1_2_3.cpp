@@ -45,8 +45,8 @@ struct Filter<Pred, std::tuple<Head, Tail...>> {
 template<class Tuple, template<class> class Pred>
 using Filter_t = typename Filter<Pred, Tuple>::type;
 
-// void_t version
 
+// void_t version
 template<template<class> class Pred, class Tuple, class = void>
 struct Filter2;
 
